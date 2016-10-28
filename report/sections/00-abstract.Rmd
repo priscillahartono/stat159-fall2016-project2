@@ -1,0 +1,4 @@
+# Abstract  
+
+
+This paper consists of the reproduced results from _Chapter 6 Linear Model Selection and Regularization_ of the book **An Introduction to Statistical Learning** _by Gareth James, Daniel Witten, Trevor Hastie, and Robert Tibshirani._
