@@ -72,15 +72,15 @@ cat("Min, 1st Quartile, Median, Mean, 3rd Quartile, Max of quantitative variable
 print(summary_quant)
 cat("\n\n")
 
-cat("Range of quantitative variables")
+cat("Range of quantitative variables\n")
 print(range_quant)
 cat("\n\n")
 
-cat("IQR of quantitative variables")
+cat("IQR of quantitative variables\n")
 print(IQR_quant)
 cat("\n\n")
 
-cat("Standard Deviation of quantitative variables")
+cat("Standard Deviation of quantitative variables\n")
 print(SD_quant)
 cat("\n\n")
 
@@ -91,15 +91,20 @@ cat("Table of Frequencey of qualitative variables\n")
 print(summary_qual)
 cat("\n\n")
 
-cat("Table of Relative Frequency of qualitative variables\n")
-cat("without Proportion\n")
+cat("Table of Relative Frequency of qualitative variables\n\n")
+cat("without Proportion\n\n")
 print(freq)
+cat("\n")
 print(freq1)
 cat("\n\n")
 
-cat("with Proportion\n")
+cat("with Proportion\n\n")
 print(prop)
+cat("\n")
 print(prop1)
+cat("\n\n")
+
+cat("Additional data\n")
 cat("\n\n")
 
 cat("Matrix of Correlation\n")
