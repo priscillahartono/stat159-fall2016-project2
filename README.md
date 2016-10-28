@@ -8,41 +8,41 @@ This is project 2 of STAT 159 held in fall 2016. It is largely based on chapter 
 The idea of the project is to perform a predictive modeling process applied on the data set Credit.
 We have to build various models to predict the variable Balance in terms of ten predictors: Income, Limit, Rating, Cards, Age, Education, Gender, Student, Married, and Ethnicity. 
 
-The structure of the project will be as follows:
-stat159-fall2016-project2
-	README.md
-	Makefile
-	LICENSE
-	session-info.txt
-	.gitignore
-	code
-		functions
-			...
-		scripts
-			...
-		tests
-			...
-	data
-		Credit.csv
-		...
-	images
-		...
-	report
-		report.pdf
-		report.Rmd
-		sections
-			00-abstract.Rmd
-			01-introduction.Rmd
-			02-data.Rmd
-			03-methods.Rmd
-			04-analysis.Rmd
-			05-results.Rmd
-			06-conclusions.Rmd
-	slides
-		...
+The structure of the project will be as follows:  
+* stat159-fall2016-project2
+	* README.md
+	* Makefile
+	* LICENSE
+	* session-info.txt
+	* .gitignore
+	* code
+		* functions
+			* ...
+		* scripts
+			* ...
+		* tests
+			* ...
+	* data
+		* Credit.csv
+		* ...
+	* images
+		* ...
+	* report
+		* report.pdf
+		* report.Rmd
+		* sections
+			* 00-abstract.Rmd
+			* 01-introduction.Rmd
+			* 02-data.Rmd
+			* 03-methods.Rmd
+			* 04-analysis.Rmd
+			* 05-results.Rmd
+			* 06-conclusions.Rmd
+	* slides
+		* ...
 	
 
-To reproduce,
+To reproduce, clone this repo, download the dataset Credit, and run with make.
 
 A list of Make commands for phony targets are below:
 * all
