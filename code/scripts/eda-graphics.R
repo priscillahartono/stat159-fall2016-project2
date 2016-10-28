@@ -94,9 +94,57 @@ dev.off
 
 
 #----------------------------------------------------------------------
-#Correlation Matrix
-correlation_matrix <- cor(quantitative)
 
+#Barplots for qualitative variables
+
+#Barchart for Gender in png
+png("../../images/barchart-gender.png")
+barplot(table(qualitative$Gender), main="Barchart of Gender")
+dev.off
+
+#Barchart for Student in png
+png("../../images/barchart-student.png")
+barplot(table(qualitative$Student), main="Barchart of Student")
+dev.off
+
+#Barchart for Married in png
+png("../../images/barchart-married.png")
+barplot(table(qualitative$Married), main="Barchart of Married")
+dev.off
+
+#Barchart for Ethnicity in png
+png("../../images/barchart-ethnicity.png")
+barplot(table(qualitative$Ethnicity), main="Barchart of Ethnicity")
+dev.off
+
+
+
+#----------------------------------------------------------------------
+
+#Conditional Boxplots between Balance and qualitative variables
+
+#Conditional Boxplots for Gender in png
+png("../../images/conditional-boxplot-gender.png")
+boxplot(Balance ~ Gender, data=credit, main="Conditional Boxplot of Gender")
+dev.off
+
+#Conditional Boxplots for Ethnicity in png
+png("../../images/conditional-boxplot-ethnicity.png")
+boxplot(Balance ~ Ethnicity, data=credit, main="Conditional Boxplot of Ethnicity")
+dev.off
+
+#Conditional Boxplots for Student in png
+png("../../images/conditional-boxplot-student.png")
+boxplot(Balance ~ Student, data=credit, main="Conditional Boxplot of Student")
+dev.off
+
+#Conditional Boxplots for Married in png
+png("../../images/conditional-boxplot-married.png")
+boxplot(Balance ~ Married, data=credit, main="Conditional Boxplot of Married")
+dev.off
+
+
+#----------------------------------------------------------------------
 
 #Scatterplot Matrix
 png('../../images/scatterplot-matrix.png')

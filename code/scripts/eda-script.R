@@ -21,14 +21,6 @@ summary(quantitative)
 #Range of quantitative variables
 apply(quantitative, 2, FUN=range)
 
-range1 <- max(quantitative$Income) - min(quantitative$Income)
-range2 <- max(quantitative$Limit) - min(quantitative$Limit)
-range3 <- max(quantitative$Rating) - min(quantitative$Rating)
-range4 <- max(quantitative$Cards) - min(quantitative$Cards)
-range5 <- max(quantitative$Age) - min(quantitative$Age)
-range6 <- max(quantitative$Education) - min(quantitative$Education)
-range7 <- max(quantitative$Balance) - min(quantitative$Balance)
-
 #IQR of quantitative variables
 apply(quantitative, 2, FUN=IQR)
 
@@ -41,10 +33,26 @@ apply(quantitative, 2, FUN=sd)
 # FUN is the function e.g. IQR, sd, mean
 #------------------------------------
 
+#----------------------------------------------------------------------
+
+#Table of Frequencey of Qualitative Variables
+
+summary(qualitative)
+
+#Table of Relative Frequency of Qualitative Variables
+#without Proportion
+table(qualitative)
+ftable(table(qualitative))
+#With proportion
+prop.table(table(qualitative))
+prop.table(ftable(table(qualitative)))
 
 
+#----------------------------------------------------------------------
+#Matrix of Correlation
+cor(quantitative)
 
 
-
-
+#Anova's between Balance and all the other qualitative variables
+aov(Balance~Gender+Student+Married+Education, credit)
 
