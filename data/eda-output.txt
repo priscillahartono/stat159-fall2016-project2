@@ -2,20 +2,27 @@ Summary Statistics of Quantitative Variables
 
 
 Min, 1st Quartile, Median, Mean, 3rd Quartile, Max of quantitative variables
-     Income           Limit           Rating          Cards      
- Min.   : 10.35   Min.   :  855   Min.   : 93.0   Min.   :1.000  
- 1st Qu.: 21.01   1st Qu.: 3088   1st Qu.:247.2   1st Qu.:2.000  
- Median : 33.12   Median : 4622   Median :344.0   Median :3.000  
- Mean   : 45.22   Mean   : 4736   Mean   :354.9   Mean   :2.958  
- 3rd Qu.: 57.47   3rd Qu.: 5873   3rd Qu.:437.2   3rd Qu.:4.000  
- Max.   :186.63   Max.   :13913   Max.   :982.0   Max.   :9.000  
-      Age          Education        Balance       
- Min.   :23.00   Min.   : 5.00   Min.   :   0.00  
- 1st Qu.:41.75   1st Qu.:11.00   1st Qu.:  68.75  
- Median :56.00   Median :14.00   Median : 459.50  
- Mean   :55.67   Mean   :13.45   Mean   : 520.01  
- 3rd Qu.:70.00   3rd Qu.:16.00   3rd Qu.: 863.00  
- Max.   :98.00   Max.   :20.00   Max.   :1999.00  
+     Income           Limit           Rating     
+ Min.   : 10.35   Min.   :  855   Min.   : 93.0  
+ 1st Qu.: 21.01   1st Qu.: 3088   1st Qu.:247.2  
+ Median : 33.12   Median : 4622   Median :344.0  
+ Mean   : 45.22   Mean   : 4736   Mean   :354.9  
+ 3rd Qu.: 57.47   3rd Qu.: 5873   3rd Qu.:437.2  
+ Max.   :186.63   Max.   :13913   Max.   :982.0  
+     Cards            Age          Education    
+ Min.   :1.000   Min.   :23.00   Min.   : 5.00  
+ 1st Qu.:2.000   1st Qu.:41.75   1st Qu.:11.00  
+ Median :3.000   Median :56.00   Median :14.00  
+ Mean   :2.958   Mean   :55.67   Mean   :13.45  
+ 3rd Qu.:4.000   3rd Qu.:70.00   3rd Qu.:16.00  
+ Max.   :9.000   Max.   :98.00   Max.   :20.00  
+    Balance       
+ Min.   :   0.00  
+ 1st Qu.:  68.75  
+ Median : 459.50  
+ Mean   : 520.01  
+ 3rd Qu.: 863.00  
+ Max.   :1999.00  
 
 
 Range of quantitative variables
@@ -25,15 +32,17 @@ Range of quantitative variables
 
 
 IQR of quantitative variables
-   Income     Limit    Rating     Cards       Age Education   Balance 
-  36.4635 2784.7500  190.0000    2.0000   28.2500    5.0000  794.2500 
+   Income     Limit    Rating     Cards       Age Education 
+  36.4635 2784.7500  190.0000    2.0000   28.2500    5.0000 
+  Balance 
+ 794.2500 
 
 
 Standard Deviation of quantitative variables
-     Income       Limit      Rating       Cards         Age   Education 
-  35.244273 2308.198848  154.724143    1.371275   17.249807    3.125207 
-    Balance 
- 459.758877 
+     Income       Limit      Rating       Cards         Age 
+  35.244273 2308.198848  154.724143    1.371275   17.249807 
+  Education     Balance 
+   3.125207  459.758877 
 
 
 Summary Statistics of Qualitative Variables
@@ -166,22 +175,22 @@ Additional data
 
 
 Matrix of Correlation
-               Income       Limit      Rating       Cards         Age
-Income     1.00000000  0.79208834  0.79137763 -0.01827261 0.175338403
-Limit      0.79208834  1.00000000  0.99687974  0.01023133 0.100887922
-Rating     0.79137763  0.99687974  1.00000000  0.05323903 0.103164996
-Cards     -0.01827261  0.01023133  0.05323903  1.00000000 0.042948288
-Age        0.17533840  0.10088792  0.10316500  0.04294829 1.000000000
-Education -0.02769198 -0.02354853 -0.03013563 -0.05108422 0.003619285
-Balance    0.46365646  0.86169727  0.86362516  0.08645635 0.001835119
-             Education      Balance
-Income    -0.027691982  0.463656457
-Limit     -0.023548534  0.861697267
-Rating    -0.030135627  0.863625161
-Cards     -0.051084217  0.086456347
-Age        0.003619285  0.001835119
-Education  1.000000000 -0.008061576
-Balance   -0.008061576  1.000000000
+               Income       Limit      Rating       Cards
+Income     1.00000000  0.79208834  0.79137763 -0.01827261
+Limit      0.79208834  1.00000000  0.99687974  0.01023133
+Rating     0.79137763  0.99687974  1.00000000  0.05323903
+Cards     -0.01827261  0.01023133  0.05323903  1.00000000
+Age        0.17533840  0.10088792  0.10316500  0.04294829
+Education -0.02769198 -0.02354853 -0.03013563 -0.05108422
+Balance    0.46365646  0.86169727  0.86362516  0.08645635
+                  Age    Education      Balance
+Income    0.175338403 -0.027691982  0.463656457
+Limit     0.100887922 -0.023548534  0.861697267
+Rating    0.103164996 -0.030135627  0.863625161
+Cards     0.042948288 -0.051084217  0.086456347
+Age       1.000000000  0.003619285  0.001835119
+Education 0.003619285  1.000000000 -0.008061576
+Balance   0.001835119 -0.008061576  1.000000000
 
 
 Anova's between Balance and all the other qualitative variables
@@ -190,9 +199,12 @@ Call:
     data = credit)
 
 Terms:
-                  Gender  Student  Married Education Residuals
-Sum of Squares     38892  5623889    16976     64057  78596098
-Deg. of Freedom        1        1        1         1       395
+                  Gender  Student  Married Education
+Sum of Squares     38892  5623889    16976     64057
+Deg. of Freedom        1        1        1         1
+                Residuals
+Sum of Squares   78596098
+Deg. of Freedom       395
 
 Residual standard error: 446.0689
 Estimated effects may be unbalanced
