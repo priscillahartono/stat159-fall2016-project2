@@ -1,0 +1,49 @@
+---
+output: pdf_document
+---
+
+```{r echo=FALSE, warning=FALSE}
+library(png)
+library(grid)
+library(xtable)
+load('../../data/ols-regression.Rdata')
+load('../../data/ridge-regression.RData')
+load('../../data/lasso-regression.RData')
+load('../../data/principal-components-regression.RData')
+load('../../data/partial-least-squares-regression.RData')
+load('../../data/correlation-matrix.RData')
+```
+
+# Results
+
+Relationship: correlation matrix  
+
+merged_coefs = data.frame(
+  OLS = c(coef_ols[3], coef_ols[4], coef_ols[5], coef_ols[6], coef_ols[7], coef_ols[8], coef_ols[9], coef_ols[10], coef_ols[11], coef_ols[12], coef_ols[13]),
+  Ridge = c(ridge_fulldata_coeff),
+  Lasso = c(lasso_coef[2], lasso_coef[3], lasso_coef[4], lasso_coef[5], lasso_coef[6], lasso_coef[7], lasso_coef[8], lasso_coef[9], lasso_coef[10], lasso_coef[11]),
+  PCR= c(pcr_fulldata_coef),
+  PLSR = c(plsr_coef) 
+  )
+
+```{r results='asis', message=FALSE, echo=FALSE, warning=FALSE}
+merged_coefs <- merge(coef_ols, ridge_fulldata_coef, lasso_coef, pcr_fulldata_coef, plsr_coef)
+coef_models <- xtable(merged_coefs, caption="Coefficient Estimates for all models")
+print(coef_models, type="latex", comment=FALSE, caption.placement='top')
+```
+
+Table with each model's MSE.
+```{r results='asis', message=FALSE, echo=FALSE, warning=FALSE}
+merged_mse <- data.frame(
+  Model = c("OLS", "Ridge", "Lasso", "PCR", "PLS"),
+  MSE = c(mse_ols, ridge_MSE, lasso_mean, pcr_MSE, plsr_mean))
+mse_models <- xtable(merged_mse, caption="MSE for all models")
+print(mse_models, type="latex", comment=FALSE, caption.placement='top')
+```
+
+
+Graph for all models
+
+
+
+

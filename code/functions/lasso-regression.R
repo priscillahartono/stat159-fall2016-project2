@@ -40,7 +40,7 @@ lasso_lam = cv_lasso$lambda.min
 lasso_pred = predict(lasso_mod, s = lasso_lam, newx = testing_set_x)
 
 #Compute mean squared error
-lasso_mean = ((lasso_pred - testing_set_y)^2)
+lasso_mean = mean((lasso_pred - testing_set_y)^2)
 
 #Refit lasso regression on full data set
 #-----------------------------------------

@@ -1,0 +1,29 @@
+---
+output: pdf_document
+---
+
+```{r echo=FALSE, warning=FALSE}
+library(png)
+library(grid)
+library(xtable)
+load('../../data/ols-regression.Rdata')
+load('../../data/ridge-regression.RData')
+load('../../data/lasso-regression.RData')
+load('../../data/principal-components-regression.RData')
+load('../../data/partial-least-squares-regression.RData')
+load('../../data/correlation-matrix.RData')
+```
+
+# Analysis  
+## EDA Analysis
+quantitative, qualitative variables, with ANOVA etc.
+## Pre-modelling Data Process  
+1) dummy variable
+2) mean centering and standardization  
+
+We did an OLS model, a ridge and lasso model using the 10-fold cross validation to select lambda, a pcr and plsr model using 10-fold cross validation to select component.  
+
+All of these regression models are done on the training data, using the model that was scaled and centered.
+
+
+
