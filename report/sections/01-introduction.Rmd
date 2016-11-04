@@ -1,0 +1,16 @@
+# Introduction
+
+
+So far, in this course, we have come across response Y and a set of variables X1, X2, ..., Xp. We used the least squares model in a regression setting to observe their relationship. Continuing on from that, we want to approach more linear model framework to better yield *predictive accuracy* and *model interpretability*.
+
+**Prediction accuracy** provides the true relationship between the response and the predictors. Are they approximately linear? Does the least squares estimates have a low bias? This depends on n as compared to p. If n >> p, this will yield low variance, hence will produce good results. However, when this is not the case, there can be a lot of variability in the least squares fit, resulting in overfitting and poor predictions. It is even worse if p > n. There is no longer a unique least squares coefficient estimate since the variance is infinite.
+
+**Model interpretability** removes irrelevant variables from a multiple regression model. This allows us to obtain a model that is easier to interpret as the coefficient estimate gets set to zero. However, in least squares, it is unlikely that it yields any coefficient estimate that is exactly zero. Hence, in this paper, we will discuss other models to fix this.
+
+We will cover three methods:    
+- **Subset selection** 
+This approach identifies predictors we believe are related to a response and fitting them into a model using least squares on the reduced set of variables.  
+- **Shrinkage**  
+This approach fits all predictors to a model. However, the estimated coefficients are shrunken towards zero relative to the least squares estimates. This will lead to a lower variance, which may even go until zero.  
+- **Dimension reduction**  
+This approach projects predictors into M-dimensional subspace where M < p. We do this by computing M linear combinations and use them as predictors to fit a linear regression model by least squares.
