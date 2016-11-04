@@ -1,8 +1,5 @@
 
 scaled_credit <- read.csv('../../data/scaled-credit.csv')
-train_data <- read.csv('../../data/training-set.csv')
-test_data <- read.csv('../../data/testing-set.csv')
-
 
 #OLS is a method to estimate the unknown parameters in a linear regression model
 #with a goal of minimizing the sum of the squares of the differences between the observed responses and the predicted by a linear function of a set
