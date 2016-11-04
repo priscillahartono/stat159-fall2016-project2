@@ -1,9 +1,6 @@
-PHONY: all data dataproc tests eda ols ridge lasso pcr plsr regressions report slides session clean
+PHONY: all data dataproc eda ols ridge lasso pcr plsr regressions report slides session clean
 
 all: eda regressions report
-
-tests:
-	cd code/functions; Rscript -e "library(testthat); test_file('test-that.R')"
 
 eda:
 	cd code/scripts; Rscript -e eda-script.R
