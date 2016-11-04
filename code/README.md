@@ -1,5 +1,5 @@
 In this code folder, you will find:
-* this README.mf file
+* this README.md file
 * functions folder
   * lasso-regression.R
   * ordinary-least-squares.R
