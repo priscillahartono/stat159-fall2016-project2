@@ -43,7 +43,7 @@ Scatterplot matrix is generated from EDA:
 
 
   
-Regression model plots are generated from each regression (:
+Regression model plots are generated from each regression:
 - ridge-models-plot.png  
 - lasso-plot.png  
 - pcr-models-plot.png  
