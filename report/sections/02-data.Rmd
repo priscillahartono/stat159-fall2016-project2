@@ -1,6 +1,6 @@
-For this project, the data set we will use is _**Credit.csv**_ . The _**Credit**_ data set records _**balance**_ as the response with several quantitative and qualitative predictors.  
+For this project, the data set we will use is _**Credit.csv**_ , which can be downloaded from the author of _**An Introduction to Statistical Learning**_'s website `http://www-bcf.usc.edu/~gareth/ISL/Credit.csv`. The _**Credit**_ data set records _**balance**_ as the response variable with several quantitative and qualitative variables as the predictors.  
   
-The _**balance**_ response quantitative variable records the average credit card debt for _**400**_ individuals.
+The _**balance**_ response variable records the average credit card debt for _**400**_ individuals according to the quantitative and qualitative predictors.
   
 The qualitative variables are:  
 
