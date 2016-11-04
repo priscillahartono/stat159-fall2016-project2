@@ -33,7 +33,7 @@ pcr_best_model1 <- which.min(pcr_models$validation$PRESS)
 #Generate visualization
 #-------------------------------------
 png("../../images/pcr-models-plot.png")
-validationplot(pcr_models, val.type = "MSEP", main = "Cross-alidation Errors for PCR")
+validationplot(pcr_models, val.type = "MSEP", main = "Cross-validation Errors for PCR")
 dev.off()
 
 
