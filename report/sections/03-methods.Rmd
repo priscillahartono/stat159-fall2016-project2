@@ -89,4 +89,7 @@ Before performing PCR, it is important to _standardize_ each predictors. This en
 
 
 #### Partial Least Squares regression (PLSR)
+Partial least squares is a supervised alternative to PCR. PLS is a dimension reduction method, which identifies a new set of features that are linear combinations of the original features, and then fits a linear model via least squares using these new features. But it also identifies these new features in a supervised way meaning it makes use of the response Y to identify not only the approximate of the old features but also are related to the response. The PLS approach finds directions that explain both the response and predictors.
+
+PLS places the highest weight on the variables that are most strongly related to the response.
 
