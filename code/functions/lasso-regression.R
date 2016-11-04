@@ -18,7 +18,7 @@ testing_set_y = testing_set$Balance
 #Train Set (10-fold cross-validation)
 #-------------------------------------
 
-#Ridge fitting function output models
+#Lasso fitting function output models
 set.seed(123)
 grid = 10^seq(10,-2, length = 100)
 lasso_mod = glmnet(training_set_x, training_set_y, alpha = 1, lambda = grid)
@@ -42,7 +42,7 @@ lasso_pred = predict(lasso_mod, s = lasso_lam, newx = testing_set_x)
 #Compute mean squared error
 lasso_mean = ((lasso_pred - testing_set_y)^2)
 
-#Refit ridge regression on full data set
+#Refit lasso regression on full data set
 #-----------------------------------------
 lasso_out = glmnet(scaled_credit_x, scaled_credit_y, alpha = 1, lambda = grid)
 lasso_coef = predict(lasso_out, type ="coefficients", s = lasso_lam )[2:12, ]
