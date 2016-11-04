@@ -1,4 +1,5 @@
 credit <- read.csv('../../data/Credit.csv')
+credit['X'] <- NULL  
 
 # Converting factors into dummy variables
 # ----------------------------------------
