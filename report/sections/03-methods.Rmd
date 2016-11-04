@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 
 # Methods  
@@ -66,6 +66,11 @@ where when $\lambda \geq 0$ is called a *tuning parameter*.
 The the difference is that the ridge regression coefficient estimates \hat{\beta}^R are the values that minimizes
 
 #### Lasso regression (LR)
+Lasso coefficeient overcomes the one limitation of ridge regression: includes all the predictors in the final model. The lasso coefficients minimizes
+$$ \sum_{i=1}^n (y_i - \beta_0 - \sum_{j=1}^p \beta_j x_ij)^2 + \lambda \sum_{j=1}^p |\beta_j| = RSS + \lambda \sum_{j=1}^p |\beta_j| $$
+The lasso also shrinks the coefficient estimates towards zero. However, the $\ell_1$ penalty has the effect of forcing some of the coefficient estimates to be exactly zero when $\lambda$ is large. Hence, the lasso performs variable selection, which generates a much easier to interpret model. Lasso also yields sparse models, meaning it involves only a subset of the variables.
+
+When we perform the lasso, we are trying to find the set of coefficient estimates that lead to the smallest RSS, subject to how large $\sum_{j=1}^p |\beta_j|$ can be. It is clear that the lasso produces simpler and more interpretable model. However, it assumes that a number of the coefficients are truly equal to zero, resulting in prediction error. This shows that the ridge regression will perform better when the response is a function of many predictors with coefficients of roughly equal size while lasso regression yields a reduction in variance and can generate more accurate predictions.
 
 ## Dimension Reduction Methods  
 
