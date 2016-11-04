@@ -1,5 +1,5 @@
 ---
-output: html_document
+output: pdf_document
 ---
 
 # Methods  
@@ -7,7 +7,7 @@ output: html_document
 Goal: ways in which simple lienar model can be improved by replacing plain least square fitting with alternative fitting procedures to get better prediction accuracy and model interpretability.
 
 ## Ordinary Least Squares (OLS)
-Ordinarly least squares regression are typicall known as the benchmark, in which it is a method that is used to estimate the unknown pareameters in a linear regression model. 
+Ordinary least squares regression are typicall known as the benchmark, in which it is a method that is used to estimate the unknown pareameters in a linear regression model. 
 
 In the standard multiple linear model, $$ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_3 + ... + \beta_pX_p + \epsilon $$
 it is important to know that $Y$ represents the respons variable, $X_i$ represents the $i_th$ predictor variable, and $\beta_i$ quantifies the association between the $i_th$ predictor variable and the response. In other words, we can say that $\beta_i$ is the average effect on $Y$ for a unit increase in $X_i$, holding all other predictors fixed.  
@@ -28,7 +28,7 @@ and ith residual (estimate of the error term) be:
 $$ \epsilon_i = y_i - \hat{y_i} $$  
 
 The values $\hat{\beta_0},\hat{\beta_1},\hat{\beta_2},...,\hat{\beta_p}$ that minimizes the RSS, where
-$$ RSS = {\sum{i=1}^p(\epsilon_i)^2}
+$$ RSS = {\sum{i=1}^p(\epsilon_i)^2} $$
 $$ RSS = {\sum{i=1}^p(y_i - \hat{y}_i)^2 } $$
 $$ RSS = {\sum (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i1 - \hat{\beta}_2 x_i2 - ... - \hat{\beta}_n x_ip )^2 } $$
 
@@ -36,7 +36,7 @@ is used to estimate the multiple least square regression coefficients.
 
 
 ## Subset Selection
-From the previous homework, we have learnt the basics of subset selection.  
+Subset selection controls variance by using a subset of the original variables. From the previous homework, we have learnt the basics of subset selection.  
 
 There are 3 classical methods:
 * Forward stepwise selection - Starting with no variables in the model with only the intercept , we then proceed by adding a variable with the lowest RSS (greatest additional improvement). This is continued until some stopping rule is satisfied.
@@ -55,15 +55,16 @@ There are two Shrinkage methods techniques:
 
 #### Ridge regression (RR)
 Ridge regression is very much alike to the least squares fitting procedure that minimizes
-$$ RSS = {\sum{i=1}^p(y_i - \beta_0, - \sum{j=1}^n(\beta_i x_ij))^2 $$
+$$ RSS = {\sum{i=1}^p(y_i - \beta_0, - \sum{j=1}^n(\beta_i x_ij))^2 } $$
 
-The difference between ridge regression and RSS is that the coefficients are estimated by minimizing
+The difference between ridge regression and RSS is that the coefficients estimates $\hat{\beta}^R$ are the values that minimizes 
+$$ RSS + \lambda {\sum{j=1}^n(\beta_j)^2} $$
 
-$$ RidgeRegression = RSS + \lambda {\sum{j=1}^n(\beta_j)^2} $$
+where $\lambda \geq 0$ is called a _tuning parameter_.
 
-where when $\lambda \geq 0$ is called a *tuning parameter*.
+Just like the least square fitting, by making the RSS small, we can get the estimates that fit the data well. However, the second part of the equation $\lambda {\sum{j=1}^n(\beta_j)^2}$, which is called the _shrinkage penalty_. The shrinkage penalty get smaller as $\beta_1,...,\beta_n$ gets to zero, giving an effect of shrinking the estimates of $\beta_j$ towards zero. Unlike leaast square fitting, ridge regression will generate a different set of coefficient estimats for $\hat{\beta_\lambda}^R$ for each value of $\lambda$.
 
-The the difference is that the ridge regression coefficient estimates \hat{\beta}^R are the values that minimizes
+When $\lambda = 0$, then the ridge regression will be equivalent to the ordinary least square fitting. When $\lambda$ grows larger, however, the impact of the shrinkage penalty will grow, and the ridge regression coefficient estimates will approach zero. Additionally, there will also be an decrease in the flexibility of ridge regression fit, which leads to decreased variance and increased bias. Th theory behind this is rooted from the _bias-variance trade-off_.
 
 #### Lasso regression (LR)
 Lasso coefficeient overcomes the one limitation of ridge regression: includes all the predictors in the final model. The lasso coefficients minimizes
@@ -73,8 +74,19 @@ The lasso also shrinks the coefficient estimates towards zero. However, the $\el
 When we perform the lasso, we are trying to find the set of coefficient estimates that lead to the smallest RSS, subject to how large $\sum_{j=1}^p |\beta_j|$ can be. It is clear that the lasso produces simpler and more interpretable model. However, it assumes that a number of the coefficients are truly equal to zero, resulting in prediction error. This shows that the ridge regression will perform better when the response is a function of many predictors with coefficients of roughly equal size while lasso regression yields a reduction in variance and can generate more accurate predictions.
 
 ## Dimension Reduction Methods  
+From the subset selection method and shrinkage methods above, we have seen ways in which variance can be controlled by either using a subset of the original variables, or by shrinking the coefficients towards zero. Now, we are going to explore another approach that involves transforing the predictors, and fitting them to a least square model, called _dimension reduction_.
+
+There are two Dimension Reduction methods:  
+1. Principal Componenents Regression  
+2. Partial Least Squares Regression
 
 #### Principal Components regression (PCR)
+Principal components regression is one of popular methods of dimension reduction. For a linear transformation, it involves transforming data from a high-dimensional space to a space of fewer dimensions. In other words, it derives a low-dimensional set from a large set of variables. The first step of principal components regression is to construct the first $M$ principal components, $Z_1,...,Z_M$, and use the components as predictors for the linear regression model that is fit with the ordinary least squares. A smaller number of principal components, where $M<P$ is enough to expalin the variability in the data and the relationship with the response. Using $M<P$ predictors is not a feature of subset selection because each of the $M$ principal components used is a linear combination of all the $p$ predictors.
+
+Assuming that the directions of $X_1,...,X_p$ shows that the most variations are the directions associated with $Y$, often times, although the assumption is not guaranteed, it turns out to be a reasonable approximation which gives good results. If the assumption is true, then we can say that fitting a leaast squares model to $Z_1,...,Z_M$ produces better results than fitting a least square model to $Z_1,...,Z_P$. Additionally, estimating a smaller number of coefficients can mitigate overfitting.
+
+Before performing PCR, it is important to _standardize_ each predictors. This ensures that all the variables are on the same scale, and avoids the effect the roles high-variance variables play in PCR.  
+
 
 #### Partial Least Squares regression (PLSR)
 Partial least squares is a supervised alternative to PCR. PLS is a dimension reduction method, which identifies a new set of features that are linear combinations of the original features, and then fits a linear model via least squares using these new features. But it also identifies these new features in a supervised way meaning it makes use of the response Y to identify not only the approximate of the old features but also are related to the response. The PLS approach finds directions that explain both the response and predictors.
