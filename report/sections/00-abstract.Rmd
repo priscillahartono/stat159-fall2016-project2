@@ -3,4 +3,4 @@
 
 This report is the second project of STAT 159, Reproducible and Collaborative Statistical Data Science, taught by Professor Gaston Sanchez in the fall of 2016 at UC Berkeley. STAT 159 focuses on the collaborative work and the ability to reproduce valuable data.
 
-This paper consists of the six parts: abstract, introduction, data, methods, analysis, results, conclusions. We reproduced results from _Chapter 6: Linear Model Selection and Regularization_ of [**An Introduction to Statistical Learning**](http://www-bcf.usc.edu/~gareth/ISL/) _by Gareth James, Daniel Witten, Trevor Hastie, and Robert Tibshirani._ using [**Credit.csv**](http://www-bcf.usc.edu/~gareth/ISL/Credit.csv) dataset.
+This paper consists of the six parts: abstract, introduction, data, methods, analysis, results, conclusions. We reproduced results from _Chapter 6: Linear Model Selection and Regularization_ of [**An Introduction to Statistical Learning**](http://www-bcf.usc.edu/~gareth/ISL/) _by Gareth James, Daniel Witten, Trevor Hastie, and Robert Tibshirani_ using [**Credit.csv**](http://www-bcf.usc.edu/~gareth/ISL/Credit.csv) dataset.
