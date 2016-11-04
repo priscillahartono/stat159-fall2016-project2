@@ -1,0 +1,13 @@
+# Methods  
+
+## Ordinary Least Squares (OLS)
+Ordinarly least squares regression are typicall known as the benchmark, in which it is a method used to estimate the unknown pareameters in a linear regression model. 
+
+
+## Shrinkage Methods  
+### Ridge regression (RR)
+### Lasso regression (LR)
+
+## Dimension Reduction Methods  
+### Principal Components regression (PCR)
+### Partial Least Squares regression (PLSR)
