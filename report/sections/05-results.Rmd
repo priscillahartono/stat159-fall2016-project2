@@ -6,6 +6,9 @@ output: pdf_document
 library(png)
 library(grid)
 library(xtable)
+library(ggplot2)
+library(ggthemes)
+library(reshape)
 load('../../data/ols-regression.Rdata')
 load('../../data/ridge-regression.RData')
 load('../../data/lasso-regression.RData')
@@ -20,32 +23,49 @@ Relationship: correlation matrix
 
 
 Coeffs for all variables and model
-```{r results='asis', message=FALSE, echo=FALSE, warning=FALSE}
-merged_coefs = data.frame(
-  OLS = c(coef_ols[3], coef_ols[4], coef_ols[5], coef_ols[6], coef_ols[7], coef_ols[8], coef_ols[9], coef_ols[10], coef_ols[11], coef_ols[12], coef_ols[13]),
-  Ridge = c(ridge_fulldata_coeff),
-  Lasso = c(lasso_coef[2], lasso_coef[3], lasso_coef[4], lasso_coef[5], lasso_coef[6], lasso_coef[7], lasso_coef[8], lasso_coef[9], lasso_coef[10], lasso_coef[11]),
-  PCR= c(pcr_fulldata_coef),
-  PLSR = c(plsr_coef) 
-  )
 
-coef_models <- xtable(merged_coefs, caption="Coefficient Estimates for all models")
+```{r results='asis', message=FALSE, echo=FALSE, warning=FALSE}
+o <-as.vector(coef_ols)
+r <-as.vector(ridge_fulldata_coef)
+l <-as.vector(lasso_coef)
+pc <-as.vector(pcr_fulldata_coef)
+pls <-as.vector(plsr_coef)
+models_coef <- data.frame(
+variables = c("Income", "Limit", "Rating", "Cards", "Age", "Education", "GenderFemale", "StudentYes", "MarriedYes", "EthnicityAsian", "EthnicityCaucasian"), 
+OLS = c(o[3], o[4], o[5], o[6], o[7], o[8], o[9], o[10], o[11], o[12], o[13]),
+Ridge = c(r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10], r[11], r[12]),
+Lasso = c(l[2], l[3], l[4], l[5], l[6], l[7], l[8], l[9], l[10], l[11], l[12]),
+PCR = c(pc[2], pc[3], pc[4], pc[5], pc[6], pc[7], pc[8], pc[9], pc[10], pc[11], pc[12]),
+PLSR = c(pls[2], pls[3], pls[4], pls[5], pls[6], pls[7], pls[8], pls[9], pls[10], pls[11], pls[12])
+)
+
+models_coef[is.na(models_coef)] <- 0
+coef_models <- xtable(models_coef, digits=4, caption="Coefficient Estimates for all models")
 print(coef_models, type="latex", comment=FALSE, caption.placement='top')
+
 ```
+
+
 
 Table with each model's MSE.
 ```{r results='asis', message=FALSE, echo=FALSE, warning=FALSE}
 merged_mse <- data.frame(
   Model = c("OLS", "Ridge", "Lasso", "PCR", "PLS"),
   MSE = c(mse_ols, ridge_MSE, lasso_mean, pcr_MSE, plsr_mean))
-mse_models <- xtable(merged_mse, caption="MSE for all models")
+mse_models <- xtable(merged_mse, digits=4, caption="MSE for all models")
 print(mse_models, type="latex", comment=FALSE, caption.placement='top')
 ```
 
-#melt reshape to from the data frame
-#ggplot
-
-Graph for all models
+```{r message=FALSE, echo=FALSE, warning=FALSE}
+method_coef <- melt(models_coef, id="variables")
+names(method_coef)[1] <- "Predictors"
+names(method_coef)[2] <- "Method"
+names(method_coef)[3] <- "Value"
+ggplot(data=method_coef, aes(x=Predictors, y=Value)) +
+  geom_bar(stat="identity") +
+  facet_grid(~Method)+
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.5))
+```
 
 
 

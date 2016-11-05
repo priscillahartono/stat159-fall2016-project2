@@ -22,7 +22,7 @@ y_testing <- testing_set$Balance
 #Ridge fitting function output models
 set.seed(100)
 grid <- 10^seq(10, -2, length = 100)
-ridge_models <- cv.glmnet(x_training, y_training,
+ridge_models <- cv.glmnet(data.matrix(x_training), data.matrix(y_training),
                    alpha = 0,
                    lambda = grid,
                    nfolds = 10,
@@ -49,7 +49,7 @@ ridge_MSE <- mean((ridge_predictions - y_testing)^2)
 
 #Refit ridge regression on full data set
 #-----------------------------------------
-full_data_ridge <- glmnet(x, y,
+full_data_ridge <- glmnet(data.matrix(x), data.matrix(y),
                     alpha = 0,
                     lambda = ridge_best_model,
                     standardize = FALSE,
