@@ -1,29 +1,51 @@
----
-output: pdf_document
----
-
-```{r echo=FALSE, warning=FALSE}
-library(png)
-library(grid)
-library(xtable)
-load('../../data/ols-regression.Rdata')
-load('../../data/ridge-regression.RData')
-load('../../data/lasso-regression.RData')
-load('../../data/principal-components-regression.RData')
-load('../../data/partial-least-squares-regression.RData')
-load('../../data/correlation-matrix.RData')
-```
-
 # Analysis  
-## EDA Analysis
-quantitative, qualitative variables, with ANOVA etc.
-## Pre-modelling Data Process  
-1) dummy variable
-2) mean centering and standardization  
+## Exploratory Data Analysis
+When building any model, we want to first understand it. For this dataset, we obtain descriptive statistics and summaries of all variables.
 
-We did an OLS model, a ridge and lasso model using the 10-fold cross validation to select lambda, a pcr and plsr model using 10-fold cross validation to select component.  
+### Quantitative variables
+We want to compute the following:
 
-All of these regression models are done on the training data, using the model that was scaled and centered.
+* minimum, maximum, range
+* median, first and third quartiles, interquartile range
+* mean, standard deviation
+* histogram, boxplot
 
+### Qualitative variables
+We want to compute the following:
 
+* table of frequencies with frequency
+* table of frequencies with relative frequency
+* create barcharts
+* matrix of correlation
+* scatterplot matrix
+* anova's between Balance and all qualitative variables (gender, ethnicity, student, married)
+* conditional boxplots between Balance and all qualitative variables
+
+## Pre-modelling Data Process 
+After understanding the data, we now want to start fitting the model. But before we do that, we have to:
+
+* convert factors into dummy variable
+* mean centering and standardization
+
+### Dummy Out Categorical Variables
+This is the process of transforming each categorical variable into dummy variable. We do this because the function we will use later, glmnet(), cannot process data that contains factors. So, we use **model.matrix()** to expand factors to a set of dummy variable:
+`temp_credit <- model.matrix(Balance ~ ., data = credit)`
+
+If we do **model.matrix()** only, there will be a vector of ones in the first column that we do not want. So, we assemble the full data using **cbind()**:
+`new_credit <- cbind(temp_credit[ ,-1], Balance = Balance)`
+
+### Mean Centering and Standardizing
+This is the process of making each variable have mean zero and standard deviation one. We do this because we want variables to have comparable scales:
+`scaled_credit <- scale(new_credit, center = TRUE, scale = TRUE)`.
+
+We then save is as a .csv file and use this data for further analysis:
+`write.csv(scaled_credit, file = "path/of/processed/data/scaled-credit.csv")`
+
+## Training and Testing Sets
+We now want to build and evaluate a model on the data. Two steps are required:
+
+1. training: taking a random sample for model building 
+2. test: asses the performance and understand the model performance
+
+The code to do this is `set.seed()`.
 
