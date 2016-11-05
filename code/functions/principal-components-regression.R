@@ -1,6 +1,7 @@
 library(pls)
 
 scaled_credit <- read.csv('../../data/scaled-credit.csv')
+scaled_credit['X'] <- NULL
 load("../../data/training-testing-sets.RData")
 
 scaled_credit = na.omit(scaled_credit)
@@ -9,7 +10,7 @@ testing_set = na.omit(testing_set)
 
 x <- model.matrix(Balance ~ ., scaled_credit)[, -1]
 y <- scaled_credit$Balance
-x_training <- model.matrix(Balance ~ ., training_set)[, -1]
+x_training <- model.matrix(Balance ~ ., training_set)[,-1]
 y_training <- training_set$Balance
 x_testing <- model.matrix(Balance ~ ., testing_set)[, -1]
 y_testing <- testing_set$Balance
@@ -19,8 +20,8 @@ y_testing <- testing_set$Balance
 #-------------------------------------
 
 #PCR fitting function output models
-set.seed(100)
-pcr_models <- pcr(y_training~x_training, scale=TRUE, validation="CV")
+set.seed(1)
+pcr_models <- pcr(y_training~x_training, scale=FALSE, validation="CV")
 #summary of PCR models
 sum_pcr <- summary(pcr_models)
 
@@ -40,7 +41,7 @@ dev.off()
 #Test Set
 #--------------------------------
 #Get predictions for test set
-pcr_predictions <- predict(pcr_models, s = pcr_best_model, newx=x_testing)
+pcr_predictions <- predict(pcr_models, ncomp=pcr_best_model1, newdata=x_testing)
 
 #Compute mean squared error
 pcr_MSE <- mean((pcr_predictions - y_testing)^2)

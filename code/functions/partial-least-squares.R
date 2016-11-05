@@ -2,6 +2,7 @@
 library(pls)
 
 scaled_credit <- read.csv('../../data/scaled-credit.csv')
+scaled_credit['X'] <- NULL
 load('../../data/training-testing-sets.RData')
 
 scaled_credit = na.omit(scaled_credit)
@@ -10,7 +11,7 @@ testing_set = na.omit(testing_set)
 
 scaled_credit_x = model.matrix(Balance ~ ., scaled_credit)[, -1]
 scaled_credit_y = scaled_credit$Balance
-training_set_x = model.matrix(Balance ~ ., training_set)[, -1]
+training_set_x = model.matrix(Balance ~ ., training_set)[,-1]
 training_set_y = training_set$Balance
 testing_set_x = model.matrix(Balance ~ ., testing_set)[, -1]
 testing_set_y = testing_set$Balance
@@ -21,10 +22,11 @@ testing_set_y = testing_set$Balance
 #PLSR fitting function output models
 #Generate visualization
 #-------------------------------------
-set.seed(123)
-plsr_fit <- plsr(training_set_y~training_set_x, scale=TRUE, validation="CV")
+set.seed(1)
+plsr_fit <- plsr(training_set_y~training_set_x, scale=FALSE, validation="CV")
+
 png("../../images/plsr-models-plot.png")
-validationplot(plsr_models, val.type = "MSEP", main = "Cross-validation Errors for PLSR")
+validationplot(plsr_fit, val.type = "MSEP", main = "Cross-validation Errors for PLSR")
 dev.off()
 
 #"Best" fit model
@@ -35,7 +37,7 @@ plsr_best_model1 <- which.min(plsr_models$validation$PRESS)
 #Test Set
 #--------------------------------
 #Get predictions for test set
-plsr_pred <- predict(plsr_fit, s = plsr_best_model, newx=testing_set_x)
+plsr_pred <- predict(plsr_fit, ncomp=plsr_best_model1, newdata=testing_set_x)
 
 #Compute mean squared error
 plsr_mean <- mean((plsr_pred - testing_set_y)^2)

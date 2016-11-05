@@ -1,5 +1,4 @@
-credit <- read.csv('../../data/Credit.csv')
-credit['X'] <- NULL  
+credit <- read.csv('../../data/Credit.csv', row.names = 1)
 
 # Converting factors into dummy variables
 # ----------------------------------------
@@ -8,7 +7,7 @@ credit['X'] <- NULL
 temp_credit <- model.matrix(Balance ~ ., data = credit)
 
 # removing column of ones, and appending Balance
-new_credit <- cbind(temp_credit[ , -1], Balance = credit$Balance)
+new_credit <- cbind(temp_credit[ , -1], Balance = credit[11])
 
 
 # Mean centering and standardization

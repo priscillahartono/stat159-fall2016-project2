@@ -1,4 +1,5 @@
 scaled_credit <- read.csv('../../data/scaled-credit.csv')
+scaled_credit['X'] <- NULL
 
 set.seed(100)
 

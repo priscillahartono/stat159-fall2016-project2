@@ -2,6 +2,7 @@
 library(glmnet)
 
 scaled_credit <- read.csv('../../data/scaled-credit.csv')
+scaled_credit['X'] <- NULL
 load('../../data/training-testing-sets.RData')
 
 scaled_credit = na.omit(scaled_credit)

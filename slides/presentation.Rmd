@@ -1,27 +1,131 @@
 ---
-title: "Habits"
-author: John Doe
-date: March 22, 2005
+title: "Linear Regression Methods"
+author: Andrea Widjaja, Priscilla Hartono
+date: November 4, 2016
 output: ioslides_presentation
 ---
 
-# In the morning
+# Project 2
 
-## Getting up
+# Introduction
 
-- Turn off alarm
-- Get out of bed
+So far, in this course, we have come across response Y and a set of variables X1, X2, ..., Xp. We used the least squares model in a regression setting to observe their relationship. Continuing on from that, we want to approach more linear model framework to better yield *predictive accuracy* and *model interpretability*.
 
-## Breakfast
+**Prediction accuracy** provides the true relationship between the response and the predictors. Are they approximately linear? Does the least squares estimates have a low bias? This depends on n as compared to p. If n >> p, this will yield low variance, hence will produce good results. However, when this is not the case, there can be a lot of variability in the least squares fit, resulting in overfitting and poor predictions. It is even worse if p > n. There is no longer a unique least squares coefficient estimate since the variance is infinite.
 
-- Eat eggs
-- Drink coffee
+**Model interpretability** removes irrelevant variables from a multiple regression model. This allows us to obtain a model that is easier to interpret as the coefficient estimate gets set to zero. However, in least squares, it is unlikely that it yields any coefficient estimate that is exactly zero. Hence, in this paper, we will discuss other models to fix this.
 
-# In the evening
+We will cover three methods:    
+- **Subset selection** 
+This approach identifies predictors we believe are related to a response and fitting them into a model using least squares on the reduced set of variables.  
+- **Shrinkage**  
+This approach fits all predictors to a model. However, the estimated coefficients are shrunken towards zero relative to the least squares estimates. This will lead to a lower variance, which may even go until zero.  
+- **Dimension reduction**  
+This approach projects predictors into M-dimensional subspace where M < p. We do this by computing M linear combinations and use them as predictors to fit a linear regression model by least squares.
 
-## Dinner
 
-- Eat spaghetti
-- Drink wine
+# Data
 
-----
+For this project, the data set we will use is _**Credit.csv**_ , which can be downloaded from the author of _**An Introduction to Statistical Learning**_'s website `http://www-bcf.usc.edu/~gareth/ISL/Credit.csv`. The _**Credit**_ data set records _**balance**_ as the response variable with several quantitative and qualitative variables as the predictors.  
+  
+The _**balance**_ response variable records the average credit card debt for _**400**_ individuals according to the quantitative and qualitative predictors.
+  
+The qualitative variables are:  
+
+* _**gender**_  (F/M)
+* _**student**_ (status: yes/no) 
+* _**married**_  (status: yes/no)
+* _**ethnicity**_  (caucasian, african american, asian)
+
+
+The quantitative variables are:  
+
+* _**age**_  
+* _**cards**_ (number of credit cards)  
+* _**education**_  (years of education)
+* _**income**_  (in thousands of dollars)
+* _**limit**_  (credit limit)
+* _**rating**_ (credit rating)
+
+# Methods  
+We create a model linear regression using the least squares model.  
+  
+There are two Shrinkage methods techniques:  
+1. Ridge Regression  
+2. The Lasso  
+
+There are two Dimension Reduction methods:  
+1. Principal Componenents Regression  
+2. Partial Least Squares Regression  
+
+# Results
+```{r eval = TRUE, echo=FALSE, warning=FALSE}
+library(png)
+library(grid)
+library(xtable)
+library(ggplot2)
+library(ggthemes)
+library(reshape)
+load('../data/ols-regression.Rdata')
+load('../data/ridge-regression.RData')
+load('../data/lasso-regression.RData')
+load('../data/principal-components-regression.RData')
+load('../data/partial-least-squares-regression.RData')
+load('../data/correlation-matrix.RData')
+```
+
+# Results
+
+### Coefficient Estimates
+When conducting analysis, it is important to know the coefficent estimates for each model. Below are two representation of the regression coefficients needed to conduct analysis in table form and bargraph format. 
+
+```{r results='asis', message=FALSE, echo=FALSE, warning=FALSE}
+o <-as.vector(coef_ols)
+r <-as.vector(ridge_fulldata_coef)
+l <-as.vector(lasso_coef)
+pc <-as.vector(pcr_fulldata_coef)
+pls <-as.vector(plsr_coef)
+models_coef <- data.frame(
+variables = c("Income", "Limit", "Rating", "Cards", "Age", "Education", "GenderFemale", "StudentYes", "MarriedYes", "EthnicityAsian", "EthnicityCaucasian"), 
+OLS = c(o[2], o[3], o[4], o[5], o[6], o[7], o[8], o[9], o[10], o[11], o[12]),
+Ridge = c(r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10], r[11], r[12]),
+Lasso = c(l[1], l[2], l[3], l[4], l[5], l[6], l[7], l[8], l[9], l[10], l[11]),
+PCR = c(pc[1], pc[2], pc[3], pc[4], pc[5], pc[6], pc[7], pc[8], pc[9], pc[10], pc[11]),
+PLSR = c(pls[1], pls[2], pls[3], pls[4], pls[5], pls[6], pls[7], pls[8], pls[9], pls[10], pls[11])
+)
+
+models_coef[is.na(models_coef)] <- 0
+coef_models <- xtable(models_coef, digits=4, caption="Coefficient Estimates for all models")
+print(coef_models, type="latex", comment=FALSE, caption.placement='top')
+
+```
+
+From the table, we can see that OLS and PCR has similar coefficients, whereas Ridge, Lasso, and PLSR are similar.
+
+```{r message=FALSE, echo=FALSE, warning=FALSE}
+method_coef <- melt(models_coef, id="variables")
+names(method_coef)[1] <- "Predictors"
+names(method_coef)[2] <- "Method"
+names(method_coef)[3] <- "Value"
+ggplot(data=method_coef, aes(x=Predictors, y=Value)) +
+  geom_bar(stat="identity") +
+  facet_grid(~Method)+
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.5))
+```
+
+From the bargraph, we can tell that there are 4 major variables, that significantly impact the regression for each models. These variables are: *StudentYes*, *Rating*, *Income*, and *Limit*.
+
+
+### Mean Squared Error
+When looking at the training set mean squared errors for each model from the table produced below,   
+
+```{r results='asis', message=FALSE, echo=FALSE, warning=FALSE}
+merged_mse <- data.frame(
+  Model = c("OLS", "Ridge", "Lasso", "PCR", "PLS"),
+  MSE = c(mse_ols, ridge_MSE, lasso_mean, pcr_MSE, plsr_mean))
+mse_models <- xtable(merged_mse, digits=4, caption="MSE for all models test")
+print(mse_models, type="latex", comment=FALSE, caption.placement='top')
+```
+  
+we can see that the best methods were PCR and PLS, yielding the lowest mean squared errors, at about `0.0397`. Additionally, we can also tell that since the mean squared error of the OLS is largest at about `0.0448`, it means that the OLS method is the worst among all the other methods. The second words method is the Lasso method, in which it yields `0.0417` MSE, which is larger compared to Ridge method's MSE of `0.0412`.
+

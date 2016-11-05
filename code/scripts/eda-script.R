@@ -38,10 +38,8 @@ summary_qual <- summary(qualitative)
 
 #Table of Relative Frequency of Qualitative Variables
 #without Proportion
-freq <- table(qualitative)
 freq1 <- ftable(table(qualitative))
 #With proportion
-prop <- prop.table(table(qualitative))
 prop1 <- prop.table(ftable(table(qualitative)))
 
 #----------------------------------------------------------------------
@@ -93,14 +91,10 @@ cat("\n\n")
 
 cat("Table of Relative Frequency of qualitative variables\n\n")
 cat("without Proportion\n\n")
-print(freq)
-cat("\n")
 print(freq1)
 cat("\n\n")
 
 cat("with Proportion\n\n")
-print(prop)
-cat("\n")
 print(prop1)
 cat("\n\n")
 
