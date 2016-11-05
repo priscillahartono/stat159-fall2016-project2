@@ -30,7 +30,6 @@ plot(lasso_mod)
 set.seed(1)
 cv_lasso = cv.glmnet(training_set_x, training_set_y, alpha = 1, lambda = grid, intercept = FALSE, standardize = FALSE)
 png('../../images/lasso-plot.png')
-<<<<<<< HEAD
 plot(cv_lasso, main = "Plot of Lasso Models")
 dev.off()
 
