@@ -98,9 +98,15 @@
 
 <p>So far, in this course, we have come across response Y and a set of variables X1, X2, &#8230;, Xp. We used the least squares model in a regression setting to observe their relationship. Continuing on from that, we want to approach more linear model framework to better yield <em>predictive accuracy</em> and <em>model interpretability</em>.</p>
 
+<h3>Prediction accuracy</h3>
+
 <p><strong>Prediction accuracy</strong> provides the true relationship between the response and the predictors. Are they approximately linear? Does the least squares estimates have a low bias? This depends on n as compared to p. If n &gt;&gt; p, this will yield low variance, hence will produce good results. However, when this is not the case, there can be a lot of variability in the least squares fit, resulting in overfitting and poor predictions. It is even worse if p &gt; n. There is no longer a unique least squares coefficient estimate since the variance is infinite.</p>
 
+<h3>Model interpretability</h3>
+
 <p><strong>Model interpretability</strong> removes irrelevant variables from a multiple regression model. This allows us to obtain a model that is easier to interpret as the coefficient estimate gets set to zero. However, in least squares, it is unlikely that it yields any coefficient estimate that is exactly zero. Hence, in this paper, we will discuss other models to fix this.</p>
+
+<h3>Methods</h3>
 
 <p>We will cover three methods:<br/>- <strong>Subset selection</strong>This approach identifies predictors we believe are related to a response and fitting them into a model using least squares on the reduced set of variables.<br/>- <strong>Shrinkage</strong><br/>This approach fits all predictors to a model. However, the estimated coefficients are shrunken towards zero relative to the least squares estimates. This will lead to a lower variance, which may even go until zero.<br/>- <strong>Dimension reduction</strong><br/>This approach projects predictors into M-dimensional subspace where M &lt; p. We do this by computing M linear combinations and use them as predictors to fit a linear regression model by least squares.</p>
 
@@ -110,6 +116,8 @@
 
 <p>The <em><strong>balance</strong></em> response variable records the average credit card debt for <em><strong>400</strong></em> individuals according to the quantitative and qualitative predictors.</p>
 
+<h3>Qualitative variables</h3>
+
 <p>The qualitative variables are:</p>
 
 <ul>
@@ -118,6 +126,8 @@
 <li><em><strong>married</strong></em> (status: yes/no)</li>
 <li><em><strong>ethnicity</strong></em> (caucasian, african american, asian)</li>
 </ul>
+
+<h3>Qualitative variables</h3>
 
 <p>The quantitative variables are:</p>
 
@@ -130,7 +140,9 @@
 <li><em><strong>rating</strong></em> (credit rating)</li>
 </ul>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Methods</h2></hgroup><article  id="methods">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Methods</h2></hgroup><article  id="methods-1">
+
+<h3>OLS, Shrinkage, Dimension Reduction</h3>
 
 <p>We create a model linear regression using the least squares model.</p>
 
@@ -138,15 +150,53 @@
 
 <p>There are two Dimension Reduction methods:<br/>1. Principal Componenents Regression<br/>2. Partial Least Squares Regression</p>
 
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Analysis</h2></hgroup><article  id="analysis">
+
+</article></slide><slide class=''><hgroup><h2>Exploratory Data Analysis</h2></hgroup><article  id="exploratory-data-analysis">
+
+<p>When building any model, we want to first understand it. For this dataset, we obtain descriptive statistics and summaries of all variables.</p>
+
+</article></slide><slide class=''><hgroup><h2>Pre-modelling Data Process</h2></hgroup><article  id="pre-modelling-data-process">
+
+<p>After understanding the data, we now want to start fitting the model. But before we do that, we have to:</p>
+
+<ul>
+<li>convert factors into dummy variable</li>
+<li>mean centering and standardization</li>
+</ul>
+
+<h3>Dummy Out Categorical Variables</h3>
+
+<p>This is the process of transforming each categorical variable into dummy variable. We do this because the function we will use later, glmnet(), cannot process data that$<code>temp_credit &lt;- model.matrix(Balance ~ ., data = credit)</code></p>
+
+<p>If we do <strong>model.matrix()</strong> only, there will be a vector of ones in the first column that we do not want. So, we assemble the full data using <strong>cbind()</strong>:<code>new_credit &lt;- cbind(temp_credit[ ,-1], Balance = Balance)</code></p>
+
+<h3>Mean Centering and Standardizing</h3>
+
+<p>This is the process of making each variable have mean zero and standard deviation one. We do this because we want variables to have comparable scales:<code>scaled_credit &lt;- scale(new_credit, center = TRUE, scale = TRUE)</code>.</p>
+
+<p>We then save is as a .csv file and use this data for further analysis:<code>write.csv(scaled_credit, file = &quot;path/of/processed/data/scaled-credit.csv&quot;)</code></p>
+
+</article></slide><slide class=''><hgroup><h2>Training and Testing Sets</h2></hgroup><article  id="training-and-testing-sets">
+
+<p>We now want to build and evaluate a model on the data. Two steps are required:</p>
+
+<ol>
+<li>training: taking a random sample for model building</li>
+<li>test: asses the performance and understand the model performance</li>
+</ol>
+
+<p>The code to do this is <code>set.seed()</code>.</p>
+
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Results</h2></hgroup><article  id="results">
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Results</h2></hgroup><article  id="results-1">
-
-<h3>Coefficient Estimates</h3>
+</article></slide><slide class=''><hgroup><h2>Coefficient Estimates</h2></hgroup><article  id="coefficient-estimates">
 
 <p>When conducting analysis, it is important to know the coefficent estimates for each model. Below are two representation of the regression coefficients needed to conduct analysis in table form and bargraph format.</p>
 
 
+
+</article></slide><slide class=''><hgroup><h2>Table</h2></hgroup><article  id="table">
 
 <p>From the table, we can see that OLS and PCR has similar coefficients, whereas Ridge, Lasso, and PLSR are similar.</p>
 

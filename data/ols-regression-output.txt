@@ -4,10 +4,12 @@ Call:
 lm(formula = Balance ~ ., data = scaled_credit)
 
 Coefficients:
-       (Intercept)              Income               Limit              Rating               Cards                 Age  
-         8.236e-16          -5.982e-01           9.584e-01           3.825e-01           5.286e-02          -2.303e-02  
-         Education        GenderFemale          StudentYes          MarriedYes      EthnicityAsian  EthnicityCaucasian  
-        -7.469e-03          -1.159e-02           2.782e-01          -9.054e-03           1.595e-02           1.101e-02  
+       (Intercept)              Income               Limit              Rating  
+         8.236e-16          -5.982e-01           9.584e-01           3.825e-01  
+             Cards                 Age           Education        GenderFemale  
+         5.286e-02          -2.303e-02          -7.469e-03          -1.159e-02  
+        StudentYes          MarriedYes      EthnicityAsian  EthnicityCaucasian  
+         2.782e-01          -9.054e-03           1.595e-02           1.101e-02  
 
 
 
@@ -48,7 +50,9 @@ Mean Squared Error (OLS)
 
 
 Coefficients of OLS
-       (Intercept)             Income              Limit             Rating              Cards                Age 
-      8.236405e-16      -5.981715e-01       9.584387e-01       3.824789e-01       5.286497e-02      -2.303340e-02 
-         Education       GenderFemale         StudentYes         MarriedYes     EthnicityAsian EthnicityCaucasian 
-     -7.469459e-03      -1.159309e-02       2.781549e-01      -9.054196e-03       1.595067e-02       1.100529e-02 
+       (Intercept)             Income              Limit             Rating 
+      8.236405e-16      -5.981715e-01       9.584387e-01       3.824789e-01 
+             Cards                Age          Education       GenderFemale 
+      5.286497e-02      -2.303340e-02      -7.469459e-03      -1.159309e-02 
+        StudentYes         MarriedYes     EthnicityAsian EthnicityCaucasian 
+      2.781549e-01      -9.054196e-03       1.595067e-02       1.100529e-02 

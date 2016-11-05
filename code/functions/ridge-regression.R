@@ -1,5 +1,6 @@
 # install.packages('glmnet')
 library(glmnet)
+library(methods)  
 
 scaled_credit <- read.csv('../../data/scaled-credit.csv')
 scaled_credit['X'] <-NULL

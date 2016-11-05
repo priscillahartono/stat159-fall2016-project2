@@ -30,21 +30,17 @@ regressions:
 	make pcr
 	make plsr
 
-paper/paper.md: paper/sections/00-abstract.md paper/sections/01-introduction.md paper/sections/02-discussion.md paper/sections/03-conclusions.md
-	cd paper/sections; pandoc *.md -s -o paper.md
-	cd paper/sections; mv paper.md ../
-report:
-	cd report; report/sections/00-abstract.Rmd report/sections/01-introduction.Rmd report/sections/02-data.Rmd report/sections/03-methods.Rmd report/sections/04-analysis.Rmd report/sections/05-results.Rmd
+report: report/report.Rmd report/sections/00-abstract.Rmd report/sections/01-introduction.Rmd report/sections/02-data.Rmd report/sections/03-methods.Rmd report/sections/04-analysis.Rmd report/sections/05-results.Rmd report/sections/06-conclusions.Rmd
 	cd report; Rscript -e "library(rmarkdown); render('report.Rmd', 'pdf_document')"
 
 slides:
 	cd slides; Rscript -e "library(rmarkdown); render('presentation.Rmd', 'ioslides_presentation')"
 
-session:
-	bash session.sh
-
 data:
-	cd data; curl -O http://www-bcf.usc.edu/~gareth/ISL/Credit.csv
+	cd data; curl -O http://www-bcf.usc.edu/~gareth/ISL/Credit.csv >> Credit.csv
 
 clean:
-	rm -f report/report.pdf
+	cd report; rm -f report/report.pdf
+
+session:
+	bash session.sh

@@ -1,5 +1,6 @@
 # install.packages('pls')
-library(pls)
+library(pls)  
+library(methods)
 
 scaled_credit <- read.csv('../../data/scaled-credit.csv')
 scaled_credit['X'] <- NULL
@@ -30,9 +31,9 @@ validationplot(plsr_fit, val.type = "MSEP", main = "Cross-validation Errors for 
 dev.off()
 
 #"Best" fit model
-plsr_best_model <- plsr_models$validation$PRESS
+plsr_best_model <- plsr_fit$validation$PRESS
 #smallest cross-validation occurs for component
-plsr_best_model1 <- which.min(plsr_models$validation$PRESS)
+plsr_best_model1 <- which.min(plsr_fit$validation$PRESS)
 
 #Test Set
 #--------------------------------
@@ -51,4 +52,4 @@ plsr_coef <- coef(plsr_out)
 
 #Save file to RData
 #-------------------
-save(plsr_models, plsr_best_model1, plsr_pred, plsr_mean, plsr_out, plsr_coef, file="../../data/partial-least-squares-regression.RData")
+save(plsr_fit, plsr_best_model1, plsr_pred, plsr_mean, plsr_out, plsr_coef, file="../../data/partial-least-squares-regression.RData")

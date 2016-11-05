@@ -11,9 +11,16 @@ output: ioslides_presentation
 
 So far, in this course, we have come across response Y and a set of variables X1, X2, ..., Xp. We used the least squares model in a regression setting to observe their relationship. Continuing on from that, we want to approach more linear model framework to better yield *predictive accuracy* and *model interpretability*.
 
+### Prediction accuracy  
+
 **Prediction accuracy** provides the true relationship between the response and the predictors. Are they approximately linear? Does the least squares estimates have a low bias? This depends on n as compared to p. If n >> p, this will yield low variance, hence will produce good results. However, when this is not the case, there can be a lot of variability in the least squares fit, resulting in overfitting and poor predictions. It is even worse if p > n. There is no longer a unique least squares coefficient estimate since the variance is infinite.
 
+### Model interpretability  
+
 **Model interpretability** removes irrelevant variables from a multiple regression model. This allows us to obtain a model that is easier to interpret as the coefficient estimate gets set to zero. However, in least squares, it is unlikely that it yields any coefficient estimate that is exactly zero. Hence, in this paper, we will discuss other models to fix this.
+  
+
+### Methods  
 
 We will cover three methods:    
 - **Subset selection** 
@@ -30,6 +37,8 @@ For this project, the data set we will use is _**Credit.csv**_ , which can be do
   
 The _**balance**_ response variable records the average credit card debt for _**400**_ individuals according to the quantitative and qualitative predictors.
   
+###Qualitative variables  
+
 The qualitative variables are:  
 
 * _**gender**_  (F/M)
@@ -37,6 +46,7 @@ The qualitative variables are:
 * _**married**_  (status: yes/no)
 * _**ethnicity**_  (caucasian, african american, asian)
 
+###Qualitative variables  
 
 The quantitative variables are:  
 
@@ -48,6 +58,8 @@ The quantitative variables are:
 * _**rating**_ (credit rating)
 
 # Methods  
+
+### OLS, Shrinkage, Dimension Reduction
 We create a model linear regression using the least squares model.  
   
 There are two Shrinkage methods techniques:  
@@ -58,7 +70,45 @@ There are two Dimension Reduction methods:
 1. Principal Componenents Regression  
 2. Partial Least Squares Regression  
 
-# Results
+# Analysis  
+
+## Exploratory Data Analysis  
+
+When building any model, we want to first understand it. For this dataset, we obtain descriptive statistics and summaries of all variables.
+
+## Pre-modelling Data Process  
+
+After understanding the data, we now want to start fitting the model. But before we do that, we have to:
+
+* convert factors into dummy variable
+* mean centering and standardization
+
+### Dummy Out Categorical Variables  
+This is the process of transforming each categorical variable into dummy variable. We do this because the function we will use later, glmnet(), cannot process data that$
+`temp_credit <- model.matrix(Balance ~ ., data = credit)`
+
+If we do **model.matrix()** only, there will be a vector of ones in the first column that we do not want. So, we assemble the full data using **cbind()**:
+`new_credit <- cbind(temp_credit[ ,-1], Balance = Balance)`
+
+### Mean Centering and Standardizing
+This is the process of making each variable have mean zero and standard deviation one. We do this because we want variables to have comparable scales:
+`scaled_credit <- scale(new_credit, center = TRUE, scale = TRUE)`.
+
+We then save is as a .csv file and use this data for further analysis:
+`write.csv(scaled_credit, file = "path/of/processed/data/scaled-credit.csv")`
+
+## Training and Testing Sets  
+
+We now want to build and evaluate a model on the data. Two steps are required:
+
+1. training: taking a random sample for model building
+2. test: asses the performance and understand the model performance
+
+The code to do this is `set.seed()`.
+
+
+# Results 
+
 ```{r eval = TRUE, echo=FALSE, warning=FALSE}
 library(png)
 library(grid)
@@ -74,9 +124,8 @@ load('../data/partial-least-squares-regression.RData')
 load('../data/correlation-matrix.RData')
 ```
 
-# Results
+## Coefficient Estimates  
 
-### Coefficient Estimates
 When conducting analysis, it is important to know the coefficent estimates for each model. Below are two representation of the regression coefficients needed to conduct analysis in table form and bargraph format. 
 
 ```{r results='asis', message=FALSE, echo=FALSE, warning=FALSE}
@@ -99,6 +148,8 @@ coef_models <- xtable(models_coef, digits=4, caption="Coefficient Estimates for 
 print(coef_models, type="latex", comment=FALSE, caption.placement='top')
 
 ```
+
+## Table  
 
 From the table, we can see that OLS and PCR has similar coefficients, whereas Ridge, Lasso, and PLSR are similar.
 
