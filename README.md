@@ -17,29 +17,15 @@ The structure of the project will be as follows:
 	* .gitignore
 	* code
 		* functions
-			* ...
 		* scripts
-			* ...
-		* tests
-			* ...
 	* data
-		* Credit.csv
-		* ...
 	* images
-		* ...
 	* report
 		* report.pdf
 		* report.Rmd
 		* sections
-			* 00-abstract.Rmd
-			* 01-introduction.Rmd
-			* 02-data.Rmd
-			* 03-methods.Rmd
-			* 04-analysis.Rmd
-			* 05-results.Rmd
-			* 06-conclusions.Rmd
 	* slides
-		* ...
+
 	
 
 To reproduce, clone this repo, download the dataset Credit, and run with make.
