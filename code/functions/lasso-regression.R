@@ -28,7 +28,7 @@ plot(lasso_mod)
 #Generate visualization
 set.seed(1)
 cv_lasso = cv.glmnet(training_set_x, training_set_y, alpha = 1, lambda = grid, intercept = FALSE, standardize = FALSE)
-png('../../images/lasso-plot.png', main = "Plot of Lasso Models")
+png('../../images/lasso-plot.png')
 plot(cv_lasso)
 dev.off()
 
