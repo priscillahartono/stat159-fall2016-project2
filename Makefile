@@ -30,7 +30,7 @@ regressions:
 	make pcr
 	make plsr
 
-report: report/report.Rmd report/sections/00-abstract.Rmd report/sections/01-introduction.Rmd report/sections/02-data.Rmd report/sections/03-methods.Rmd report/sections/04-analysis.Rmd report/sections/05-results.Rmd report/sections/06-conclusions.Rmd
+report: report/report.Rmd
 	cd report; Rscript -e "library(rmarkdown); render('report.Rmd', 'pdf_document')"
 
 slides:
@@ -42,5 +42,5 @@ data:
 clean:
 	cd report; rm -f report/report.pdf
 
-session:
+session: code/scripts/session-info-script.R
 	bash session.sh
