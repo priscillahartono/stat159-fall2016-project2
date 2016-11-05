@@ -1,0 +1,5 @@
+# Conclusion
+
+From the dataset Credit.csv, we were able to develop five different models to predict an individual's balance given variables income, limit, rating, cards, age, education, gender, student, married, and ethnicity. 
+
+The five models were ordinary least squares (OLS), ridge regression (RR), lasso regression (LR), principal components regression (PCR), and partial least squares regression (PLSR). Each of them had their pros and cons, and we were able to observe and evaluate each of these.

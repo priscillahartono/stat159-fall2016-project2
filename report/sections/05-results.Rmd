@@ -73,7 +73,7 @@ mse_models <- xtable(merged_mse, digits=4, caption="MSE for all models test")
 print(mse_models, type="latex", comment=FALSE, caption.placement='top')
 ```
   
-we can see that the best methods were PCR and PLS, yielding the lowest mean squared errors, at about `0.0397`. Additionally, we can also tell that since the mean squared error of the OLS is largest at about `0.0448`, it means that the OLS method is the worst among all the other methods. The second words method is the Lasso method, in which it yields `0.0417` MSE, which is larger compared to Ridge method's MSE of `0.0412`.
+we can see that the best methods were PCR and PLS, yielding the lowest mean squared errors, at about `0.0397`. Additionally, we can also tell that since the mean squared error of the OLS is largest at about `0.0448`, it means that the OLS method is the worst among all the other methods. The second worst method is the Lasso method, in which it yields `0.0417` MSE, which is larger compared to Ridge method's MSE of `0.0412`.
  
 
 
